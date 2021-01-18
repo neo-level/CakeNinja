@@ -5,8 +5,11 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     private Rigidbody _targeyRigidbody;
-    private float _torqueRange = 10.0f;
-
+    private float _maxTorque = 10.0f;
+    private float _minSpeed = 12.0f;
+    private float _maxSpeed = 16.0f;
+    private float _xRange = 4.0f;
+    private float _ySpawnPosition = 6.0f;
 
     // Start is called before the first frame update
     private void Start()
@@ -14,14 +17,17 @@ public class Target : MonoBehaviour
         // Get the rigidbody component on the object.
         _targeyRigidbody = GetComponent<Rigidbody>();
 
-        ApplyRandomUpwardForce();
-        ApplyRandomRotation();
+        // Adds an upward force between a random value.
+        _targeyRigidbody.AddForce(ApplyRandomUpwardForce(), ForceMode.Impulse);
+
+        // Adds a random rotation on the object.
+        _targeyRigidbody.AddTorque(
+            x: ApplyRandomRotation(),
+            y: ApplyRandomRotation(),
+            z: ApplyRandomRotation(), ForceMode.Impulse);
 
         // Random position.
-        transform.position = new Vector3(
-            x: Random.Range(-4, 4),
-            y: -6,
-            z: 0);
+        transform.position = RandomSpawnPosition();
     }
 
     // Update is called once per frame
@@ -29,18 +35,23 @@ public class Target : MonoBehaviour
     {
     }
 
-    // Adds a random rotation on the object.
-    private void ApplyRandomRotation()
+    private float ApplyRandomRotation()
     {
-        _targeyRigidbody.AddTorque(
-            x: Random.Range(-_torqueRange, _torqueRange),
-            y: Random.Range(-_torqueRange, _torqueRange),
-            z: Random.Range(-_torqueRange, _torqueRange), ForceMode.Impulse);
+        return Random.Range(-_maxTorque, _maxTorque);
     }
 
-    // Adds an upward force between a random value.
-    private void ApplyRandomUpwardForce()
+    // returns a random generated vector3.
+    private Vector3 ApplyRandomUpwardForce()
     {
-        _targeyRigidbody.AddForce(Vector3.up * Random.Range(12, 16), ForceMode.Impulse);
+        return Vector3.up * Random.Range(_minSpeed, _maxSpeed);
+    }
+
+    // returns a random generated vector 3 used for a spawn position.
+    private Vector3 RandomSpawnPosition()
+    {
+        return new Vector3(
+            x: Random.Range(-_xRange, _xRange),
+            y: -_ySpawnPosition,
+            z: 0);
     }
 }
