@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Target : MonoBehaviour
 {
@@ -53,5 +55,17 @@ public class Target : MonoBehaviour
             x: Random.Range(-_xRange, _xRange),
             y: -_ySpawnPosition,
             z: 0);
+    }
+
+    // If the player clicks on an object, destroy it.
+    private void OnMouseDown()
+    {
+        Destroy(gameObject);
+    }
+
+    // When the object goes out of view, destroy it.
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
