@@ -11,7 +11,7 @@ public class Target : MonoBehaviour
     private float _minSpeed = 12.0f;
     private float _maxSpeed = 16.0f;
     private float _xRange = 4.0f;
-    private float _ySpawnPosition = 6.0f;
+    private float _ySpawnPosition = 2.0f;
 
     // Start is called before the first frame update
     private void Start()
