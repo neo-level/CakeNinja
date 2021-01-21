@@ -77,10 +77,13 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Starts the game.
     /// </summary>
-    public void StarGame()
+    public void StarGame(int difficulty)
     {
         _score = 0;
         isGameActive = true;
+        
+        // speeds up the spawn rate depending in the chosen difficulty.
+        _spawnRate /= difficulty;
         
         StartCoroutine(SpawnTarget());
         
