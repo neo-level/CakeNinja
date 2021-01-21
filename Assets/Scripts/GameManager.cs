@@ -17,16 +17,12 @@ public class GameManager : MonoBehaviour
 
     public bool isGameActive;
 
-    private int _score; 
+    private int _score;
     private float _spawnRate = 1.0f;
 
     // Start is called before the first frame update
     private void Start()
     {
-        _score = 0;
-        isGameActive = true;
-        
-        StartCoroutine(SpawnTarget());
     }
 
     // Update is called once per frame
@@ -66,16 +62,25 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         isGameActive = false;
-        
     }
-    
+
     /// <summary>
     /// Restarts the game when the restart button is clicked.
     /// </summary>
-    public void RestartGame ()
+    public void RestartGame()
     {
-       // Takes the active scene and loads it.
-       SceneManager.LoadScene(sceneName: SceneManager.GetActiveScene().name);
-       
+        // Takes the active scene and loads it.
+        SceneManager.LoadScene(sceneName: SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Starts the game.
+    /// </summary>
+    public void StarGame()
+    {
+        _score = 0;
+        isGameActive = true;
+
+        StartCoroutine(SpawnTarget());
     }
 }
