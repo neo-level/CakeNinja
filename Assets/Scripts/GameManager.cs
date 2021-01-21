@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Serialization;
+
+// enables the usage of your scenes.
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,11 +54,24 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + _score;
     }
 
+    /// <summary>
+    /// Ends the game.
+    /// </summary>
     public void GameOver()
     {
         // Sets the game over text component to enabled.
         gameOverText.gameObject.SetActive(true);
         isGameActive = false;
         
+    }
+    
+    /// <summary>
+    /// Restarts the game when the restart button is clicked.
+    /// </summary>
+    public void RestartGame ()
+    {
+       // Takes the active scene and loads it.
+       SceneManager.LoadScene(sceneName: SceneManager.GetActiveScene().name);
+       
     }
 }
