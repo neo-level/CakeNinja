@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOVerText;
+    
 
     private int _score;
 
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Sets the game over text component to enabled.
+        gameOVerText.gameObject.SetActive(true);
+        
         StartCoroutine(SpawnTarget());
     }
 
