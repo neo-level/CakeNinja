@@ -15,6 +15,8 @@ public class Target : MonoBehaviour
     private float _xRange = 4.0f;
     private float _ySpawnPosition = 2.0f;
 
+    public int pointValue;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -68,7 +70,7 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
         
         // Use the score method to increase the score when the object is destroyed.
-        _gameManager.UpdateScore(5);
+        _gameManager.UpdateScore(pointValue);
     }
 
     // When the object goes out of view, destroy it.
