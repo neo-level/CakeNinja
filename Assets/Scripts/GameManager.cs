@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI gameOVerText;
-    
+    public TextMeshProUGUI gameOverText;
+
 
     private int _score;
 
@@ -17,9 +18,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        // Sets the game over text component to enabled.
-        gameOVerText.gameObject.SetActive(true);
-        
         StartCoroutine(SpawnTarget());
     }
 
@@ -49,5 +47,11 @@ public class GameManager : MonoBehaviour
 
         // Set the content of the text.
         scoreText.text = "Score: " + _score;
+    }
+
+    public void GameOver()
+    {
+        // Sets the game over text component to enabled.
+        gameOverText.gameObject.SetActive(true);
     }
 }
