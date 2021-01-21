@@ -16,6 +16,7 @@ public class Target : MonoBehaviour
     private float _ySpawnPosition = 2.0f;
 
     public int pointValue;
+    public ParticleSystem explosionParticle;
 
     // Start is called before the first frame update
     private void Start()
@@ -71,6 +72,10 @@ public class Target : MonoBehaviour
         
         // Use the score method to increase the score when the object is destroyed.
         _gameManager.UpdateScore(pointValue);
+        
+        // Instantiate an explosion particle prefab on the position of the current target.
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        
     }
 
     // When the object goes out of view, destroy it.
