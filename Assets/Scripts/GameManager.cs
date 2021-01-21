@@ -5,12 +5,15 @@ using TMPro;
 
 // enables the usage of your scenes.
 using UnityEngine.SceneManagement;
+// Allows interaction with buttons.
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public Button restartButton;
 
     public bool isGameActive;
 
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         // Sets the game over text component to enabled.
         gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
         isGameActive = false;
         
     }
