@@ -68,13 +68,16 @@ public class Target : MonoBehaviour
     // If the player clicks on an object, destroy it.
     private void OnMouseDown()
     {
-        Destroy(gameObject);
+        if (_gameManager.isGameActive)
+        {
+            Destroy(gameObject);
         
-        // Use the score method to increase the score when the object is destroyed.
-        _gameManager.UpdateScore(pointValue);
+            // Use the score method to increase the score when the object is destroyed.
+            _gameManager.UpdateScore(pointValue);
         
-        // Instantiate an explosion particle prefab on the position of the current target.
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            // Instantiate an explosion particle prefab on the position of the current target.
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        }
         
     }
 
