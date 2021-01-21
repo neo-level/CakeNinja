@@ -33,16 +33,14 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(_spawnRate);
             int index = Random.Range(0, targets.Count);
             Instantiate(targets[index]);
-            // Temp increment score on spawn to test if it works.
-            UpdateScore(5);
         }
     }
 
     /// <summary>
-    /// Updates the score by adding a value for every object that spawns => phase 1
+    /// Updates the score by adding a value.
     /// </summary>
     /// <param name="scoreToAdd"></param>
-    private void UpdateScore(int scoreToAdd)
+    public void UpdateScore(int scoreToAdd)
     {
         // Add the score.
         _score += scoreToAdd;

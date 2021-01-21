@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public class Target : MonoBehaviour
 {
     private Rigidbody _targeyRigidbody;
+    private GameManager _gameManager;
+
     private float _maxTorque = 10.0f;
     private float _minSpeed = 12.0f;
     private float _maxSpeed = 16.0f;
@@ -30,6 +32,9 @@ public class Target : MonoBehaviour
 
         // Random position.
         transform.position = RandomSpawnPosition();
+        
+        // Get the Game manager script.
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -61,6 +66,9 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        
+        // Use the score method to increase the score when the object is destroyed.
+        _gameManager.UpdateScore(5);
     }
 
     // When the object goes out of view, destroy it.
