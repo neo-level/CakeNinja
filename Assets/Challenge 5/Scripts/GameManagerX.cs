@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManagerX : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timeText;
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
     public Button restartButton; 
@@ -15,6 +18,7 @@ public class GameManagerX : MonoBehaviour
     public List<GameObject> targetPrefabs;
 
     private int score;
+    private int _time;
     private float spawnRate = 1.5f;
     public bool isGameActive;
 
@@ -29,6 +33,8 @@ public class GameManagerX : MonoBehaviour
         isGameActive = true;
         StartCoroutine(SpawnTarget());
         score = 0;
+        _time = 60;
+        StartCoroutine(StartCountdown(_time));
         UpdateScore(0);
         titleScreen.SetActive(false);
     }
@@ -85,6 +91,18 @@ public class GameManagerX : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    // Start countdown timer.
+    private IEnumerator StartCountdown(int totalTime)
+    {
+        while (totalTime > 0 && isGameActive)
+        {
+            yield return new WaitForSeconds(1.0f);
+            totalTime--;
+            timeText.text = "Time: " + totalTime;
+        }
+        GameOver();
     }
 
 }
